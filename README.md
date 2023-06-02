@@ -1,2 +1,3 @@
-# Preference Learning for POI Recommendation based on Contrast between Long and Short-term
-Code will be released after accepted.
+# CLSPRec: Contrastive Learning of Long and Short-term Preferences for Next POI Recommendation
+
+Full code will be released after accepted. 😉
