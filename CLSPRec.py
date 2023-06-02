@@ -144,7 +144,6 @@ class Encoder(nn.Module):
         return out
 
 
-# 因为 query 和 key 的维度不一样大，所以专门写了这个 Attention
 class Attention(nn.Module):
     def __init__(
             self,
@@ -183,7 +182,6 @@ class CLSPRec(nn.Module):
         self.vocab_size = vocab_size
         self.total_embed_size = f_embed_size * 5
 
-        # LAYERS
         self.embedding = CheckInEmbedding(
             f_embed_size,
             vocab_size
@@ -210,9 +208,7 @@ class CLSPRec(nn.Module):
                                         nn.LeakyReLU(),
                                         nn.Dropout(dropout_p),
                                         nn.Linear(self.total_embed_size * forward_expansion, vocab_size["POI"]))
-
         self.loss_func = nn.CrossEntropyLoss()
-
         self.tryone_line2 = nn.Linear(self.total_embed_size, f_embed_size)
         self.enhance_val = nn.Parameter(torch.tensor(0.5))
 
@@ -228,7 +224,6 @@ class CLSPRec(nn.Module):
 
             feature_seq[0, masked_index] = self.vocab_size["POI"]  # mask POI
             feature_seq[1, masked_index] = self.vocab_size["cat"]  # mask cat
-            # 2 user 不能 mask
             feature_seq[3, masked_index] = self.vocab_size["hour"]  # mask hour
             feature_seq[4, masked_index] = self.vocab_size["day"]  # mask day
 
